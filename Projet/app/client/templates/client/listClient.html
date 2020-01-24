@@ -1,0 +1,135 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Music Club A Music Category Flat Bootstarp Resposive Website Template | Album :: w3layouts</title>
+    <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="js/jquery.min.js"></script>
+    <!-- Custom Theme files -->
+    <!--theme-style-->
+    <link href="css/z.css" rel="stylesheet" type="text/css" media="all" />
+    <!--//theme-style-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="Music Club Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template,
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <script src="js/modernizr.custom.97074.js"></script>
+    <!--script-->
+    <script src="js/jquery.chocolat.js"></script>
+    <link rel="stylesheet" href="css/chocolat.css" type="text/css" media="screen" charset="utf-8">
+    <!--light-box-files -->
+    <script type="text/javascript" charset="utf-8">
+        $(function () {
+            $('.gallery a').Chocolat();
+        });
+    </script>
+
+</head>
+<body>
+    <!--header-->
+    <div class="header header-main">
+        <div class="container">
+            <div class="header-top">
+                <div class="logo">
+                    <h1><a href="/#/homee">Music Club</a></h1>
+                </div>
+                <div class="top-nav">
+                    <span class="menu"><img src="images/menu.png" alt=""> </span>
+                    <ul>
+                        <li><a href="/#/cmd" class="hvr-sweep-to-bottom color"><i class="glyphicon glyphicon-home"></i>Commande</a> </li>
+                        <li><a href="/#/prd" class="hvr-sweep-to-bottom color1"><i class="glyphicon glyphicon-picture"></i>Produit  </a> </li>
+                        <li><a href="/#/cat" class="hvr-sweep-to-bottom color2"><i class="glyphicon glyphicon-tags"></i>Categorie</a></li>
+                        <li><a href="/#/sousCat" class="hvr-sweep-to-bottom color3"><i class="glyphicon glyphicon-tags"></i>Sous Categorie</a></li>
+                        <li><a href="/#/listMsg" class="hvr-sweep-to-bottom color4"><i class="glyphicon glyphicon-tags"></i>Messages</a></li>
+                        <li><a href="/client/login" class="hvr-sweep-to-bottom color4"><i class="glyphicon glyphicon-envelope"></i>Deconnection </a></li>
+                        <div class="clearfix"> </div>
+                    </ul>
+                    <!--script-->
+                    <script>
+                        $("span.menu").click(function () {
+                            $(".top-nav ul").slideToggle(500, function () {
+                            });
+                        });
+                    </script>
+                </div>
+                <div class="clearfix"> </div>
+            </div>
+        </div>
+    </div>
+
+   
+    <a href="#/addclient" class="btn btn-primary">create</a>
+    <hr />
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            List Clients
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="form-group pull-left">
+                        <label class="control-label"> Search </label>
+                        <label>
+                            <input type="text" class="form-control" ng-model="searchText" />
+                        </label>
+
+                    </div>
+                </div>
+            </div>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th ng-click="sortBy(codeClt)">
+                            CodeClt
+                        </th>
+                        <th ng-click="sortBy(nom)">Nom</th>
+                        <th ng-click="sortBy(prenom)">prenom</th>
+                        <th ng-click="sortBy(cin)">cin</th>
+                        <th ng-click="sortBy(email)">email</th>
+                        <th ng-click="sortBy(password)">password</th>
+                        <th ng-click="sortBy(telephone)">telehpone</th>
+                        <th>Modifier| Supprimer</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat=" client in clients | filter : searchText | orderBy : sortColumn :reverse">
+                        <td>{{client.codeClt}}</td>
+                        <td>{{client.nom}}</td>
+                        <td>{{client.prenom}}</td>
+                        <td>{{client.cin}}</td>
+                        <td>{{client.email}}</td>
+                        <td>{{client.password}}</td>
+                        <td>{{client.telephone}}</td>
+                        <td>
+                            <a class="btn btn-success" href="/#/updateClient/{{client.codeClt}}">Edit</a>
+                            <a class="btn btn-danger" href="#" ng-click="deleteClient(client.codeClt)">Delete</a>
+                        </td>
+                    </tr>
+                    <tr ng-if="!clients || (clients|filter:searchText).length == 0 ">
+                        <td colspan="8" style="text-align: center;">
+                            no data to display
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="container">
+            <h2><a href="/#/homee">Music Club</a></h2>
+            <ul>
+                <li><a href="/#/clt" class="hvr-sweep-to-bottom color"><i class="glyphicon glyphicon-home"></i>Client  </a> </li>
+                <li><a href="/#/prd" class="hvr-sweep-to-bottom color1"><i class="glyphicon glyphicon-picture"></i>Produit  </a> </li>
+                <li><a href="/#/cat" class="hvr-sweep-to-bottom color2"><i class="glyphicon glyphicon-tags"></i>Categorie</a></li>
+                <li><a href="/#/sousCat" class="hvr-sweep-to-bottom color3"><i class="glyphicon glyphicon-tags"></i>Sous Categorie</a></li>
+                <div class="clearfix"> </div>
+            </ul>
+            <p> © 2015 Music Club All rights reserved | Design by  <a href="http://w3layouts.com/" target="_blank">W3layouts</a></p>
+        </div>
+    </div>
+    <!--//footer-->
+</body>
+</html>

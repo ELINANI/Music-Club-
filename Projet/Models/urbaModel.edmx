@@ -1,0 +1,583 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="projetAspModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Admins">
+          <Key>
+            <PropertyRef Name="codeAdm" />
+          </Key>
+          <Property Name="codeAdm" Type="int" Nullable="false" />
+          <Property Name="nom" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="prenom" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="cin" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="login" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="telephone" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Categorie">
+          <Key>
+            <PropertyRef Name="codeCAt" />
+          </Key>
+          <Property Name="codeCAt" Type="int" Nullable="false" />
+          <Property Name="nomCat" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="codeClt" />
+          </Key>
+          <Property Name="codeClt" Type="int" Nullable="false" />
+          <Property Name="nom" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="prenom" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="cin" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="telephone" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="typee" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="cltMessage">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" />
+          <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="subjects" Type="varchar" MaxLength="50" />
+          <Property Name="messagee" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Commande">
+          <Key>
+            <PropertyRef Name="idCmd" />
+          </Key>
+          <Property Name="idCmd" Type="int" Nullable="false" />
+          <Property Name="dateCmd" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="codeClt" Type="int" />
+          <Property Name="idPrd" Type="int" />
+          <Property Name="qteCmd" Type="int" />
+        </EntityType>
+        <EntityType Name="Msgs">
+          <Key>
+            <PropertyRef Name="codeMsg" />
+          </Key>
+          <Property Name="idmd" Type="int" />
+          <Property Name="codeMsg" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Produit">
+          <Key>
+            <PropertyRef Name="codePrd" />
+          </Key>
+          <Property Name="codePrd" Type="int" Nullable="false" />
+          <Property Name="libelle" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Stock" Type="int" Nullable="false" />
+          <Property Name="image" Type="varchar" MaxLength="5000" Nullable="false" />
+          <Property Name="prix" Type="float" Nullable="false" />
+          <Property Name="codeCat" Type="int" />
+        </EntityType>
+        <EntityType Name="sousCategorie">
+          <Key>
+            <PropertyRef Name="codeSousCAt" />
+          </Key>
+          <Property Name="codeSousCAt" Type="int" Nullable="false" />
+          <Property Name="nomSousCat" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="codeCat" Type="int" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <!--Erreurs détectées durant la génération :
+avertissement 6002: La table/vue 'projetAsp.dbo.View_1' n'a pas de clé primaire définie. La clé a été déduite et la définition a été créée en tant que table/vue en lecture seule.-->
+        <EntityType Name="View_1">
+          <Key>
+            <PropertyRef Name="idCmd" />
+            <PropertyRef Name="dateCmd" />
+            <PropertyRef Name="libelle" />
+            <PropertyRef Name="Stock" />
+            <PropertyRef Name="image" />
+            <PropertyRef Name="prix" />
+            <PropertyRef Name="codeSousCAt" />
+            <PropertyRef Name="nomSousCat" />
+          </Key>
+          <Property Name="idCmd" Type="int" Nullable="false" />
+          <Property Name="dateCmd" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="codeClt" Type="int" />
+          <Property Name="qteCmd" Type="int" />
+          <Property Name="libelle" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Stock" Type="int" Nullable="false" />
+          <Property Name="image" Type="varchar" MaxLength="5000" Nullable="false" />
+          <Property Name="prix" Type="float" Nullable="false" />
+          <Property Name="codeSousCAt" Type="int" Nullable="false" />
+          <Property Name="nomSousCat" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="c1">
+          <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
+          <End Role="Commande" Type="Self.Commande" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="codeClt" />
+            </Principal>
+            <Dependent Role="Commande">
+              <PropertyRef Name="codeClt" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="c2">
+          <End Role="sousCategorie" Type="Self.sousCategorie" Multiplicity="0..1" />
+          <End Role="Produit" Type="Self.Produit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="sousCategorie">
+              <PropertyRef Name="codeSousCAt" />
+            </Principal>
+            <Dependent Role="Produit">
+              <PropertyRef Name="codeCat" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="c3">
+          <End Role="Categorie" Type="Self.Categorie" Multiplicity="0..1" />
+          <End Role="sousCategorie" Type="Self.sousCategorie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categorie">
+              <PropertyRef Name="codeCAt" />
+            </Principal>
+            <Dependent Role="sousCategorie">
+              <PropertyRef Name="codeCat" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="c55">
+          <End Role="Produit" Type="Self.Produit" Multiplicity="0..1" />
+          <End Role="Commande" Type="Self.Commande" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produit">
+              <PropertyRef Name="codePrd" />
+            </Principal>
+            <Dependent Role="Commande">
+              <PropertyRef Name="idPrd" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="c9">
+          <End Role="Commande" Type="Self.Commande" Multiplicity="0..1" />
+          <End Role="Msgs" Type="Self.Msgs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Commande">
+              <PropertyRef Name="idCmd" />
+            </Principal>
+            <Dependent Role="Msgs">
+              <PropertyRef Name="idmd" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="projetAspModelStoreContainer">
+          <EntitySet Name="Admins" EntityType="Self.Admins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Categorie" EntityType="Self.Categorie" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="cltMessage" EntityType="Self.cltMessage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Commande" EntityType="Self.Commande" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Msgs" EntityType="Self.Msgs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Produit" EntityType="Self.Produit" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sousCategorie" EntityType="Self.sousCategorie" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="View_1" EntityType="Self.View_1" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [View_1].[idCmd] AS [idCmd], 
+    [View_1].[dateCmd] AS [dateCmd], 
+    [View_1].[codeClt] AS [codeClt], 
+    [View_1].[qteCmd] AS [qteCmd], 
+    [View_1].[libelle] AS [libelle], 
+    [View_1].[Stock] AS [Stock], 
+    [View_1].[image] AS [image], 
+    [View_1].[prix] AS [prix], 
+    [View_1].[codeSousCAt] AS [codeSousCAt], 
+    [View_1].[nomSousCat] AS [nomSousCat]
+    FROM [dbo].[View_1] AS [View_1]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="c1" Association="Self.c1">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Commande" EntitySet="Commande" />
+          </AssociationSet>
+          <AssociationSet Name="c2" Association="Self.c2">
+            <End Role="sousCategorie" EntitySet="sousCategorie" />
+            <End Role="Produit" EntitySet="Produit" />
+          </AssociationSet>
+          <AssociationSet Name="c3" Association="Self.c3">
+            <End Role="Categorie" EntitySet="Categorie" />
+            <End Role="sousCategorie" EntitySet="sousCategorie" />
+          </AssociationSet>
+          <AssociationSet Name="c55" Association="Self.c55">
+            <End Role="Produit" EntitySet="Produit" />
+            <End Role="Commande" EntitySet="Commande" />
+          </AssociationSet>
+          <AssociationSet Name="c9" Association="Self.c9">
+            <End Role="Commande" EntitySet="Commande" />
+            <End Role="Msgs" EntitySet="Msgs" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="projetAspModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="codeAdm" />
+          </Key>
+          <Property Name="codeAdm" Type="Int32" Nullable="false" />
+          <Property Name="nom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="prenom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="cin" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="login" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="telephone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Categorie">
+          <Key>
+            <PropertyRef Name="codeCAt" />
+          </Key>
+          <Property Name="codeCAt" Type="Int32" Nullable="false" />
+          <Property Name="nomCat" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="sousCategories" Relationship="Self.c3" FromRole="Categorie" ToRole="sousCategorie" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="codeClt" />
+          </Key>
+          <Property Name="codeClt" Type="Int32" Nullable="false" />
+          <Property Name="nom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="prenom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="cin" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="telephone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Commandes" Relationship="Self.c1" FromRole="Client" ToRole="Commande" />
+          <Property Name="typee" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Commande">
+          <Key>
+            <PropertyRef Name="idCmd" />
+          </Key>
+          <Property Name="idCmd" Type="Int32" Nullable="false" />
+          <Property Name="dateCmd" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="codeClt" Type="Int32" />
+          <NavigationProperty Name="Client" Relationship="Self.c1" FromRole="Commande" ToRole="Client" />
+          <NavigationProperty Name="Msgs" Relationship="Self.c9" FromRole="Commande" ToRole="Msgs" />
+          <Property Name="idPrd" Type="Int32" />
+          <Property Name="qteCmd" Type="Int32" />
+          <NavigationProperty Name="Produit" Relationship="projetAspModel.c55" FromRole="Commande" ToRole="Produit" />
+        </EntityType>
+        <EntityType Name="Msg">
+          <Key>
+            <PropertyRef Name="codeMsg" />
+          </Key>
+          <Property Name="idmd" Type="Int32" />
+          <Property Name="codeMsg" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Commande" Relationship="Self.c9" FromRole="Msgs" ToRole="Commande" />
+        </EntityType>
+        <EntityType Name="Produit">
+          <Key>
+            <PropertyRef Name="codePrd" />
+          </Key>
+          <Property Name="codePrd" Type="Int32" Nullable="false" />
+          <Property Name="libelle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Stock" Type="Int32" Nullable="false" />
+          <Property Name="image" Type="String" MaxLength="5000" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="prix" Type="Double" Nullable="false" />
+          <Property Name="codeCat" Type="Int32" />
+          <NavigationProperty Name="Commandes" Relationship="projetAspModel.c55" FromRole="Produit" ToRole="Commande" />
+          <NavigationProperty Name="sousCategorie" Relationship="projetAspModel.c21" FromRole="Produit" ToRole="sousCategorie" />
+        </EntityType>
+        <EntityType Name="sousCategorie">
+          <Key>
+            <PropertyRef Name="codeSousCAt" />
+          </Key>
+          <Property Name="codeSousCAt" Type="Int32" Nullable="false" />
+          <Property Name="nomSousCat" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="codeCat" Type="Int32" />
+          <NavigationProperty Name="Categorie" Relationship="Self.c3" FromRole="sousCategorie" ToRole="Categorie" />
+          <NavigationProperty Name="Produits" Relationship="projetAspModel.c21" FromRole="sousCategorie" ToRole="Produit" />
+        </EntityType>
+        <Association Name="c3">
+          <End Role="Categorie" Type="Self.Categorie" Multiplicity="0..1" />
+          <End Role="sousCategorie" Type="Self.sousCategorie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categorie">
+              <PropertyRef Name="codeCAt" />
+            </Principal>
+            <Dependent Role="sousCategorie">
+              <PropertyRef Name="codeCat" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="c1">
+          <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
+          <End Role="Commande" Type="Self.Commande" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="codeClt" />
+            </Principal>
+            <Dependent Role="Commande">
+              <PropertyRef Name="codeClt" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="c9">
+          <End Role="Commande" Type="Self.Commande" Multiplicity="0..1" />
+          <End Role="Msgs" Type="Self.Msg" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Commande">
+              <PropertyRef Name="idCmd" />
+            </Principal>
+            <Dependent Role="Msgs">
+              <PropertyRef Name="idmd" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="projetAspEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Admins" EntityType="Self.Admin" />
+          <EntitySet Name="Categories" EntityType="Self.Categorie" />
+          <EntitySet Name="Clients" EntityType="Self.Client" />
+          <EntitySet Name="Commandes" EntityType="Self.Commande" />
+          <EntitySet Name="Msgs" EntityType="Self.Msg" />
+          <EntitySet Name="Produits" EntityType="Self.Produit" />
+          <EntitySet Name="sousCategories" EntityType="Self.sousCategorie" />
+          <AssociationSet Name="c3" Association="Self.c3">
+            <End Role="Categorie" EntitySet="Categories" />
+            <End Role="sousCategorie" EntitySet="sousCategories" />
+          </AssociationSet>
+          <AssociationSet Name="c1" Association="Self.c1">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="Commande" EntitySet="Commandes" />
+          </AssociationSet>
+          <AssociationSet Name="c9" Association="Self.c9">
+            <End Role="Commande" EntitySet="Commandes" />
+            <End Role="Msgs" EntitySet="Msgs" />
+          </AssociationSet>
+          <EntitySet Name="sysdiagrams" EntityType="projetAspModel.sysdiagram" />
+          <EntitySet Name="View_1" EntityType="projetAspModel.View_1" />
+          <AssociationSet Name="c55" Association="projetAspModel.c55">
+            <End Role="Produit" EntitySet="Produits" />
+            <End Role="Commande" EntitySet="Commandes" />
+          </AssociationSet>
+          <AssociationSet Name="c21" Association="projetAspModel.c21">
+            <End Role="sousCategorie" EntitySet="sousCategories" />
+            <End Role="Produit" EntitySet="Produits" />
+          </AssociationSet>
+          <EntitySet Name="cltMessages" EntityType="projetAspModel.cltMessage" />
+        </EntityContainer>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="View_1">
+          <Key>
+            <PropertyRef Name="idCmd" />
+            <PropertyRef Name="dateCmd" />
+            <PropertyRef Name="libelle" />
+            <PropertyRef Name="Stock" />
+            <PropertyRef Name="image" />
+            <PropertyRef Name="prix" />
+            <PropertyRef Name="codeSousCAt" />
+            <PropertyRef Name="nomSousCat" />
+          </Key>
+          <Property Name="idCmd" Type="Int32" Nullable="false" />
+          <Property Name="dateCmd" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="codeClt" Type="Int32" />
+          <Property Name="qteCmd" Type="Int32" />
+          <Property Name="libelle" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Stock" Type="Int32" Nullable="false" />
+          <Property Name="image" Type="String" Nullable="false" MaxLength="5000" FixedLength="false" Unicode="false" />
+          <Property Name="prix" Type="Double" Nullable="false" />
+          <Property Name="codeSousCAt" Type="Int32" Nullable="false" />
+          <Property Name="nomSousCat" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="c55">
+          <End Type="projetAspModel.Produit" Role="Produit" Multiplicity="0..1" />
+          <End Type="projetAspModel.Commande" Role="Commande" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produit">
+              <PropertyRef Name="codePrd" />
+            </Principal>
+            <Dependent Role="Commande">
+              <PropertyRef Name="idPrd" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="c21">
+          <End Type="projetAspModel.sousCategorie" Role="sousCategorie" Multiplicity="0..1" />
+          <End Type="projetAspModel.Produit" Role="Produit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="sousCategorie">
+              <PropertyRef Name="codeSousCAt" />
+            </Principal>
+            <Dependent Role="Produit">
+              <PropertyRef Name="codeCat" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="cltMessage">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="subjects" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="messagee" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="projetAspModelStoreContainer" CdmEntityContainer="projetAspEntities">
+          <EntitySetMapping Name="Admins">
+            <EntityTypeMapping TypeName="projetAspModel.Admin">
+              <MappingFragment StoreEntitySet="Admins">
+                <ScalarProperty Name="codeAdm" ColumnName="codeAdm" />
+                <ScalarProperty Name="nom" ColumnName="nom" />
+                <ScalarProperty Name="prenom" ColumnName="prenom" />
+                <ScalarProperty Name="cin" ColumnName="cin" />
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="telephone" ColumnName="telephone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="projetAspModel.Categorie">
+              <MappingFragment StoreEntitySet="Categorie">
+                <ScalarProperty Name="codeCAt" ColumnName="codeCAt" />
+                <ScalarProperty Name="nomCat" ColumnName="nomCat" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clients">
+            <EntityTypeMapping TypeName="projetAspModel.Client">
+              <MappingFragment StoreEntitySet="Client">
+                <ScalarProperty Name="typee" ColumnName="typee" />
+                <ScalarProperty Name="codeClt" ColumnName="codeClt" />
+                <ScalarProperty Name="nom" ColumnName="nom" />
+                <ScalarProperty Name="prenom" ColumnName="prenom" />
+                <ScalarProperty Name="cin" ColumnName="cin" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="telephone" ColumnName="telephone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Commandes">
+            <EntityTypeMapping TypeName="projetAspModel.Commande">
+              <MappingFragment StoreEntitySet="Commande">
+                <ScalarProperty Name="qteCmd" ColumnName="qteCmd" />
+                <ScalarProperty Name="idPrd" ColumnName="idPrd" />
+                <ScalarProperty Name="idCmd" ColumnName="idCmd" />
+                <ScalarProperty Name="dateCmd" ColumnName="dateCmd" />
+                <ScalarProperty Name="codeClt" ColumnName="codeClt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Msgs">
+            <EntityTypeMapping TypeName="projetAspModel.Msg">
+              <MappingFragment StoreEntitySet="Msgs">
+                <ScalarProperty Name="idmd" ColumnName="idmd" />
+                <ScalarProperty Name="codeMsg" ColumnName="codeMsg" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Produits">
+            <EntityTypeMapping TypeName="projetAspModel.Produit">
+              <MappingFragment StoreEntitySet="Produit">
+                <ScalarProperty Name="codePrd" ColumnName="codePrd" />
+                <ScalarProperty Name="libelle" ColumnName="libelle" />
+                <ScalarProperty Name="Stock" ColumnName="Stock" />
+                <ScalarProperty Name="image" ColumnName="image" />
+                <ScalarProperty Name="prix" ColumnName="prix" />
+                <ScalarProperty Name="codeCat" ColumnName="codeCat" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sousCategories">
+            <EntityTypeMapping TypeName="projetAspModel.sousCategorie">
+              <MappingFragment StoreEntitySet="sousCategorie">
+                <ScalarProperty Name="codeSousCAt" ColumnName="codeSousCAt" />
+                <ScalarProperty Name="nomSousCat" ColumnName="nomSousCat" />
+                <ScalarProperty Name="codeCat" ColumnName="codeCat" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="projetAspModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="View_1">
+            <EntityTypeMapping TypeName="projetAspModel.View_1">
+              <MappingFragment StoreEntitySet="View_1">
+                <ScalarProperty Name="nomSousCat" ColumnName="nomSousCat" />
+                <ScalarProperty Name="codeSousCAt" ColumnName="codeSousCAt" />
+                <ScalarProperty Name="prix" ColumnName="prix" />
+                <ScalarProperty Name="image" ColumnName="image" />
+                <ScalarProperty Name="Stock" ColumnName="Stock" />
+                <ScalarProperty Name="libelle" ColumnName="libelle" />
+                <ScalarProperty Name="qteCmd" ColumnName="qteCmd" />
+                <ScalarProperty Name="codeClt" ColumnName="codeClt" />
+                <ScalarProperty Name="dateCmd" ColumnName="dateCmd" />
+                <ScalarProperty Name="idCmd" ColumnName="idCmd" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cltMessages">
+            <EntityTypeMapping TypeName="projetAspModel.cltMessage">
+              <MappingFragment StoreEntitySet="cltMessage">
+                <ScalarProperty Name="messagee" ColumnName="messagee" />
+                <ScalarProperty Name="subjects" ColumnName="subjects" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

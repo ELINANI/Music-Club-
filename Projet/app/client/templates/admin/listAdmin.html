@@ -1,0 +1,55 @@
+﻿<h2>Admins</h2>
+<a href="#/addAdmin" class="btn btn-primary">create</a>
+<hr />
+<div class="panel panel-default">
+    <div class="panel-heading">
+        List Admins
+    </div>
+    <div class="panel-body">
+        <div class="row">
+             <div class="col-lg-6">
+                 <div class="form-group pull-left" >
+                     <label class="control-label">Search</label>
+                     <label>
+                          <input type="text" class="form-control" ng-model="search" />
+                     </label>
+                 </div>
+             </div>
+        </div>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>CodeAdm</th>
+                    <th>Nom</th>
+                    <th>prenom</th>
+                    <th>cin</th>
+                    <th>email</th>
+                    <th>password</th>
+                    <th>telehpone</th>
+                    <th>Modifier| Supprimer</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat=" admin in admins | filter : search">
+                    <td>{{admin.codeAdm}}</td>
+                    <td>{{admin.nom}}</td>
+                    <td>{{admin.prenom}}</td>
+                    <td>{{admin.cin}}</td>
+                    <td>{{admin.login}}</td>
+                    <td>{{admin.password}}</td>
+                    <td>{{admin.telephone}}</td>
+                    <td>
+                        <a class="btn btn-success" href="/#/updateAdmin/{{admin.codeAdm}}">Edit</a>
+                        <a class="btn btn-danger" href="#" ng-click="deleteAdmin(admin.codeAdm)">Delete</a>
+                    </td>
+                </tr>
+                <tr ng-if="!admins || (admins|filter : search).length == 0 ">
+                    <td colspan="8" style="text-align: center;">
+                        no data to display
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

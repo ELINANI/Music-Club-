@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="projetAspModelStoreContainer" CdmEntityContainer="projetAspEntities">
+    <EntitySetMapping Name="Admins">
+      <EntityTypeMapping TypeName="projetAspModel.Admin">
+        <MappingFragment StoreEntitySet="Admins">
+          <ScalarProperty Name="codeAdm" ColumnName="codeAdm" />
+          <ScalarProperty Name="nom" ColumnName="nom" />
+          <ScalarProperty Name="prenom" ColumnName="prenom" />
+          <ScalarProperty Name="cin" ColumnName="cin" />
+          <ScalarProperty Name="login" ColumnName="login" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="telephone" ColumnName="telephone" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Categories">
+      <EntityTypeMapping TypeName="projetAspModel.Categorie">
+        <MappingFragment StoreEntitySet="Categorie">
+          <ScalarProperty Name="codeCAt" ColumnName="codeCAt" />
+          <ScalarProperty Name="nomCat" ColumnName="nomCat" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Clients">
+      <EntityTypeMapping TypeName="projetAspModel.Client">
+        <MappingFragment StoreEntitySet="Client">
+          <ScalarProperty Name="typee" ColumnName="typee" />
+          <ScalarProperty Name="codeClt" ColumnName="codeClt" />
+          <ScalarProperty Name="nom" ColumnName="nom" />
+          <ScalarProperty Name="prenom" ColumnName="prenom" />
+          <ScalarProperty Name="cin" ColumnName="cin" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="telephone" ColumnName="telephone" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Commandes">
+      <EntityTypeMapping TypeName="projetAspModel.Commande">
+        <MappingFragment StoreEntitySet="Commande">
+          <ScalarProperty Name="qteCmd" ColumnName="qteCmd" />
+          <ScalarProperty Name="idPrd" ColumnName="idPrd" />
+          <ScalarProperty Name="idCmd" ColumnName="idCmd" />
+          <ScalarProperty Name="dateCmd" ColumnName="dateCmd" />
+          <ScalarProperty Name="codeClt" ColumnName="codeClt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Msgs">
+      <EntityTypeMapping TypeName="projetAspModel.Msg">
+        <MappingFragment StoreEntitySet="Msgs">
+          <ScalarProperty Name="idmd" ColumnName="idmd" />
+          <ScalarProperty Name="codeMsg" ColumnName="codeMsg" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Produits">
+      <EntityTypeMapping TypeName="projetAspModel.Produit">
+        <MappingFragment StoreEntitySet="Produit">
+          <ScalarProperty Name="codePrd" ColumnName="codePrd" />
+          <ScalarProperty Name="libelle" ColumnName="libelle" />
+          <ScalarProperty Name="Stock" ColumnName="Stock" />
+          <ScalarProperty Name="image" ColumnName="image" />
+          <ScalarProperty Name="prix" ColumnName="prix" />
+          <ScalarProperty Name="codeCat" ColumnName="codeCat" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sousCategories">
+      <EntityTypeMapping TypeName="projetAspModel.sousCategorie">
+        <MappingFragment StoreEntitySet="sousCategorie">
+          <ScalarProperty Name="codeSousCAt" ColumnName="codeSousCAt" />
+          <ScalarProperty Name="nomSousCat" ColumnName="nomSousCat" />
+          <ScalarProperty Name="codeCat" ColumnName="codeCat" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="projetAspModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="definition" ColumnName="definition" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="View_1">
+      <EntityTypeMapping TypeName="projetAspModel.View_1">
+        <MappingFragment StoreEntitySet="View_1">
+          <ScalarProperty Name="nomSousCat" ColumnName="nomSousCat" />
+          <ScalarProperty Name="codeSousCAt" ColumnName="codeSousCAt" />
+          <ScalarProperty Name="prix" ColumnName="prix" />
+          <ScalarProperty Name="image" ColumnName="image" />
+          <ScalarProperty Name="Stock" ColumnName="Stock" />
+          <ScalarProperty Name="libelle" ColumnName="libelle" />
+          <ScalarProperty Name="qteCmd" ColumnName="qteCmd" />
+          <ScalarProperty Name="codeClt" ColumnName="codeClt" />
+          <ScalarProperty Name="dateCmd" ColumnName="dateCmd" />
+          <ScalarProperty Name="idCmd" ColumnName="idCmd" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="cltMessages">
+      <EntityTypeMapping TypeName="projetAspModel.cltMessage">
+        <MappingFragment StoreEntitySet="cltMessage">
+          <ScalarProperty Name="messagee" ColumnName="messagee" />
+          <ScalarProperty Name="subjects" ColumnName="subjects" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

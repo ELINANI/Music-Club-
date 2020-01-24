@@ -1,0 +1,220 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="projetAspModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Admins">
+    <Key>
+      <PropertyRef Name="codeAdm" />
+    </Key>
+    <Property Name="codeAdm" Type="int" Nullable="false" />
+    <Property Name="nom" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="prenom" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="cin" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="login" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="password" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="telephone" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Categorie">
+    <Key>
+      <PropertyRef Name="codeCAt" />
+    </Key>
+    <Property Name="codeCAt" Type="int" Nullable="false" />
+    <Property Name="nomCat" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Client">
+    <Key>
+      <PropertyRef Name="codeClt" />
+    </Key>
+    <Property Name="codeClt" Type="int" Nullable="false" />
+    <Property Name="nom" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="prenom" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="cin" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="password" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="telephone" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="typee" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="cltMessage">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="50" />
+    <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="subjects" Type="varchar" MaxLength="50" />
+    <Property Name="messagee" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Commande">
+    <Key>
+      <PropertyRef Name="idCmd" />
+    </Key>
+    <Property Name="idCmd" Type="int" Nullable="false" />
+    <Property Name="dateCmd" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="codeClt" Type="int" />
+    <Property Name="idPrd" Type="int" />
+    <Property Name="qteCmd" Type="int" />
+  </EntityType>
+  <EntityType Name="Msgs">
+    <Key>
+      <PropertyRef Name="codeMsg" />
+    </Key>
+    <Property Name="idmd" Type="int" />
+    <Property Name="codeMsg" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Produit">
+    <Key>
+      <PropertyRef Name="codePrd" />
+    </Key>
+    <Property Name="codePrd" Type="int" Nullable="false" />
+    <Property Name="libelle" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Stock" Type="int" Nullable="false" />
+    <Property Name="image" Type="varchar" MaxLength="5000" Nullable="false" />
+    <Property Name="prix" Type="float" Nullable="false" />
+    <Property Name="codeCat" Type="int" />
+  </EntityType>
+  <EntityType Name="sousCategorie">
+    <Key>
+      <PropertyRef Name="codeSousCAt" />
+    </Key>
+    <Property Name="codeSousCAt" Type="int" Nullable="false" />
+    <Property Name="nomSousCat" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="codeCat" Type="int" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <!--Erreurs détectées durant la génération :
+avertissement 6002: La table/vue 'projetAsp.dbo.View_1' n'a pas de clé primaire définie. La clé a été déduite et la définition a été créée en tant que table/vue en lecture seule.-->
+  <EntityType Name="View_1">
+    <Key>
+      <PropertyRef Name="idCmd" />
+      <PropertyRef Name="dateCmd" />
+      <PropertyRef Name="libelle" />
+      <PropertyRef Name="Stock" />
+      <PropertyRef Name="image" />
+      <PropertyRef Name="prix" />
+      <PropertyRef Name="codeSousCAt" />
+      <PropertyRef Name="nomSousCat" />
+    </Key>
+    <Property Name="idCmd" Type="int" Nullable="false" />
+    <Property Name="dateCmd" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="codeClt" Type="int" />
+    <Property Name="qteCmd" Type="int" />
+    <Property Name="libelle" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Stock" Type="int" Nullable="false" />
+    <Property Name="image" Type="varchar" MaxLength="5000" Nullable="false" />
+    <Property Name="prix" Type="float" Nullable="false" />
+    <Property Name="codeSousCAt" Type="int" Nullable="false" />
+    <Property Name="nomSousCat" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <Association Name="c1">
+    <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
+    <End Role="Commande" Type="Self.Commande" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Client">
+        <PropertyRef Name="codeClt" />
+      </Principal>
+      <Dependent Role="Commande">
+        <PropertyRef Name="codeClt" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="c2">
+    <End Role="sousCategorie" Type="Self.sousCategorie" Multiplicity="0..1" />
+    <End Role="Produit" Type="Self.Produit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="sousCategorie">
+        <PropertyRef Name="codeSousCAt" />
+      </Principal>
+      <Dependent Role="Produit">
+        <PropertyRef Name="codeCat" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="c3">
+    <End Role="Categorie" Type="Self.Categorie" Multiplicity="0..1" />
+    <End Role="sousCategorie" Type="Self.sousCategorie" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categorie">
+        <PropertyRef Name="codeCAt" />
+      </Principal>
+      <Dependent Role="sousCategorie">
+        <PropertyRef Name="codeCat" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="c55">
+    <End Role="Produit" Type="Self.Produit" Multiplicity="0..1" />
+    <End Role="Commande" Type="Self.Commande" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Produit">
+        <PropertyRef Name="codePrd" />
+      </Principal>
+      <Dependent Role="Commande">
+        <PropertyRef Name="idPrd" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="c9">
+    <End Role="Commande" Type="Self.Commande" Multiplicity="0..1" />
+    <End Role="Msgs" Type="Self.Msgs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Commande">
+        <PropertyRef Name="idCmd" />
+      </Principal>
+      <Dependent Role="Msgs">
+        <PropertyRef Name="idmd" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="projetAspModelStoreContainer">
+    <EntitySet Name="Admins" EntityType="Self.Admins" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Categorie" EntityType="Self.Categorie" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="cltMessage" EntityType="Self.cltMessage" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Commande" EntityType="Self.Commande" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Msgs" EntityType="Self.Msgs" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Produit" EntityType="Self.Produit" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sousCategorie" EntityType="Self.sousCategorie" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="View_1" EntityType="Self.View_1" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [View_1].[idCmd] AS [idCmd], 
+    [View_1].[dateCmd] AS [dateCmd], 
+    [View_1].[codeClt] AS [codeClt], 
+    [View_1].[qteCmd] AS [qteCmd], 
+    [View_1].[libelle] AS [libelle], 
+    [View_1].[Stock] AS [Stock], 
+    [View_1].[image] AS [image], 
+    [View_1].[prix] AS [prix], 
+    [View_1].[codeSousCAt] AS [codeSousCAt], 
+    [View_1].[nomSousCat] AS [nomSousCat]
+    FROM [dbo].[View_1] AS [View_1]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="c1" Association="Self.c1">
+      <End Role="Client" EntitySet="Client" />
+      <End Role="Commande" EntitySet="Commande" />
+    </AssociationSet>
+    <AssociationSet Name="c2" Association="Self.c2">
+      <End Role="sousCategorie" EntitySet="sousCategorie" />
+      <End Role="Produit" EntitySet="Produit" />
+    </AssociationSet>
+    <AssociationSet Name="c3" Association="Self.c3">
+      <End Role="Categorie" EntitySet="Categorie" />
+      <End Role="sousCategorie" EntitySet="sousCategorie" />
+    </AssociationSet>
+    <AssociationSet Name="c55" Association="Self.c55">
+      <End Role="Produit" EntitySet="Produit" />
+      <End Role="Commande" EntitySet="Commande" />
+    </AssociationSet>
+    <AssociationSet Name="c9" Association="Self.c9">
+      <End Role="Commande" EntitySet="Commande" />
+      <End Role="Msgs" EntitySet="Msgs" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

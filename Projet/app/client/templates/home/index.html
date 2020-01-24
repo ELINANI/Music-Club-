@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+</head>
+<header class="back">
+
+    <div class="logo">
+    </div>
+</header>
+<body>
+    <br />
+    <br />
+    <br />
+    <br />
+    <section class="container cont">
+        <h2 style="text-align: center; color: #F0637B; width :100%; background-color : black; font-family : Arial sans-serif;font-size:40px;font-weight:bold;">COLLECTION</h2>
+    </section>
+    <br />
+    <br />
+    <br />
+    <br />
+    <div class="grid">
+        <div class="sec2" ng-repeat=" produit in produits">
+            <div class="tt">
+                <div class="card">
+                    <div class="imgBx">
+                        <img src="/uploaded_images/{{produit.image}}" />
+                    </div>
+                    <div class="content">
+                        <div>
+                            <h3> {{produit.libelle}}</h3>
+                         <p> Prix :{{produit.prix}}</p>
+                            <a class="btn btn-danger" href="/#/addCmd/{{produit.codePrd}}">Commandee</a>
+                        </div>
+                    </div> 
+                </div>
+             </div>
+        </div>
+       
+    </div>
+
+   
+
+</body>
+</html>

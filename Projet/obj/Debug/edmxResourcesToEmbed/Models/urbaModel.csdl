@@ -1,0 +1,215 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="projetAspModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Admin">
+    <Key>
+      <PropertyRef Name="codeAdm" />
+    </Key>
+    <Property Name="codeAdm" Type="Int32" Nullable="false" />
+    <Property Name="nom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="prenom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="cin" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="login" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="telephone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Categorie">
+    <Key>
+      <PropertyRef Name="codeCAt" />
+    </Key>
+    <Property Name="codeCAt" Type="Int32" Nullable="false" />
+    <Property Name="nomCat" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="sousCategories" Relationship="Self.c3" FromRole="Categorie" ToRole="sousCategorie" />
+  </EntityType>
+  <EntityType Name="Client">
+    <Key>
+      <PropertyRef Name="codeClt" />
+    </Key>
+    <Property Name="codeClt" Type="Int32" Nullable="false" />
+    <Property Name="nom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="prenom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="cin" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="telephone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Commandes" Relationship="Self.c1" FromRole="Client" ToRole="Commande" />
+    <Property Name="typee" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Commande">
+    <Key>
+      <PropertyRef Name="idCmd" />
+    </Key>
+    <Property Name="idCmd" Type="Int32" Nullable="false" />
+    <Property Name="dateCmd" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="codeClt" Type="Int32" />
+    <NavigationProperty Name="Client" Relationship="Self.c1" FromRole="Commande" ToRole="Client" />
+    <NavigationProperty Name="Msgs" Relationship="Self.c9" FromRole="Commande" ToRole="Msgs" />
+    <Property Name="idPrd" Type="Int32" />
+    <Property Name="qteCmd" Type="Int32" />
+    <NavigationProperty Name="Produit" Relationship="projetAspModel.c55" FromRole="Commande" ToRole="Produit" />
+  </EntityType>
+  <EntityType Name="Msg">
+    <Key>
+      <PropertyRef Name="codeMsg" />
+    </Key>
+    <Property Name="idmd" Type="Int32" />
+    <Property Name="codeMsg" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Commande" Relationship="Self.c9" FromRole="Msgs" ToRole="Commande" />
+  </EntityType>
+  <EntityType Name="Produit">
+    <Key>
+      <PropertyRef Name="codePrd" />
+    </Key>
+    <Property Name="codePrd" Type="Int32" Nullable="false" />
+    <Property Name="libelle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Stock" Type="Int32" Nullable="false" />
+    <Property Name="image" Type="String" MaxLength="5000" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="prix" Type="Double" Nullable="false" />
+    <Property Name="codeCat" Type="Int32" />
+    <NavigationProperty Name="Commandes" Relationship="projetAspModel.c55" FromRole="Produit" ToRole="Commande" />
+    <NavigationProperty Name="sousCategorie" Relationship="projetAspModel.c21" FromRole="Produit" ToRole="sousCategorie" />
+  </EntityType>
+  <EntityType Name="sousCategorie">
+    <Key>
+      <PropertyRef Name="codeSousCAt" />
+    </Key>
+    <Property Name="codeSousCAt" Type="Int32" Nullable="false" />
+    <Property Name="nomSousCat" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="codeCat" Type="Int32" />
+    <NavigationProperty Name="Categorie" Relationship="Self.c3" FromRole="sousCategorie" ToRole="Categorie" />
+    <NavigationProperty Name="Produits" Relationship="projetAspModel.c21" FromRole="sousCategorie" ToRole="Produit" />
+  </EntityType>
+  <Association Name="c3">
+    <End Role="Categorie" Type="Self.Categorie" Multiplicity="0..1" />
+    <End Role="sousCategorie" Type="Self.sousCategorie" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categorie">
+        <PropertyRef Name="codeCAt" />
+      </Principal>
+      <Dependent Role="sousCategorie">
+        <PropertyRef Name="codeCat" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="c1">
+    <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
+    <End Role="Commande" Type="Self.Commande" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Client">
+        <PropertyRef Name="codeClt" />
+      </Principal>
+      <Dependent Role="Commande">
+        <PropertyRef Name="codeClt" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="c9">
+    <End Role="Commande" Type="Self.Commande" Multiplicity="0..1" />
+    <End Role="Msgs" Type="Self.Msg" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Commande">
+        <PropertyRef Name="idCmd" />
+      </Principal>
+      <Dependent Role="Msgs">
+        <PropertyRef Name="idmd" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="projetAspEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Admins" EntityType="Self.Admin" />
+    <EntitySet Name="Categories" EntityType="Self.Categorie" />
+    <EntitySet Name="Clients" EntityType="Self.Client" />
+    <EntitySet Name="Commandes" EntityType="Self.Commande" />
+    <EntitySet Name="Msgs" EntityType="Self.Msg" />
+    <EntitySet Name="Produits" EntityType="Self.Produit" />
+    <EntitySet Name="sousCategories" EntityType="Self.sousCategorie" />
+    <AssociationSet Name="c3" Association="Self.c3">
+      <End Role="Categorie" EntitySet="Categories" />
+      <End Role="sousCategorie" EntitySet="sousCategories" />
+    </AssociationSet>
+    <AssociationSet Name="c1" Association="Self.c1">
+      <End Role="Client" EntitySet="Clients" />
+      <End Role="Commande" EntitySet="Commandes" />
+    </AssociationSet>
+    <AssociationSet Name="c9" Association="Self.c9">
+      <End Role="Commande" EntitySet="Commandes" />
+      <End Role="Msgs" EntitySet="Msgs" />
+    </AssociationSet>
+    <EntitySet Name="sysdiagrams" EntityType="projetAspModel.sysdiagram" />
+    <EntitySet Name="View_1" EntityType="projetAspModel.View_1" />
+    <AssociationSet Name="c55" Association="projetAspModel.c55">
+      <End Role="Produit" EntitySet="Produits" />
+      <End Role="Commande" EntitySet="Commandes" />
+    </AssociationSet>
+    <AssociationSet Name="c21" Association="projetAspModel.c21">
+      <End Role="sousCategorie" EntitySet="sousCategories" />
+      <End Role="Produit" EntitySet="Produits" />
+    </AssociationSet>
+    <EntitySet Name="cltMessages" EntityType="projetAspModel.cltMessage" />
+  </EntityContainer>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="View_1">
+    <Key>
+      <PropertyRef Name="idCmd" />
+      <PropertyRef Name="dateCmd" />
+      <PropertyRef Name="libelle" />
+      <PropertyRef Name="Stock" />
+      <PropertyRef Name="image" />
+      <PropertyRef Name="prix" />
+      <PropertyRef Name="codeSousCAt" />
+      <PropertyRef Name="nomSousCat" />
+    </Key>
+    <Property Name="idCmd" Type="Int32" Nullable="false" />
+    <Property Name="dateCmd" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="codeClt" Type="Int32" />
+    <Property Name="qteCmd" Type="Int32" />
+    <Property Name="libelle" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Stock" Type="Int32" Nullable="false" />
+    <Property Name="image" Type="String" Nullable="false" MaxLength="5000" FixedLength="false" Unicode="false" />
+    <Property Name="prix" Type="Double" Nullable="false" />
+    <Property Name="codeSousCAt" Type="Int32" Nullable="false" />
+    <Property Name="nomSousCat" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <Association Name="c55">
+    <End Type="projetAspModel.Produit" Role="Produit" Multiplicity="0..1" />
+    <End Type="projetAspModel.Commande" Role="Commande" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Produit">
+        <PropertyRef Name="codePrd" />
+      </Principal>
+      <Dependent Role="Commande">
+        <PropertyRef Name="idPrd" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="c21">
+    <End Type="projetAspModel.sousCategorie" Role="sousCategorie" Multiplicity="0..1" />
+    <End Type="projetAspModel.Produit" Role="Produit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="sousCategorie">
+        <PropertyRef Name="codeSousCAt" />
+      </Principal>
+      <Dependent Role="Produit">
+        <PropertyRef Name="codeCat" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="cltMessage">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="subjects" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="messagee" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+</Schema>
